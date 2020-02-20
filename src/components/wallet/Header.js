@@ -9,8 +9,8 @@ class Header extends React.Component {
         return (
             <>
                 <div className="topbar">
-                    <TopBar logout={this.props.logout} alertMe={this.props.alertMe} />
-                    <CustomMenu />
+                    <TopBar logout={this.props.logout} />
+                    <CustomMenu /> 
                 </div>
             </>
         )

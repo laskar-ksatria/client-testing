@@ -14,10 +14,6 @@ export default class MyWallet extends Component {
     };
 
 
-    alertMe = () => {
-        alert('hallo this is from child')
-    }
-
     componentDidMount() {
         axios({
             url: 'http://35.247.159.61/users',
@@ -37,7 +33,12 @@ export default class MyWallet extends Component {
     render() {
         return (
             <div>
-                <Header logout={this.props.logout} alertMe={this.alertMe} />
+                <Header logout={this.props.logout} />
+
+                {/* <MainPage />
+
+                <Footer /> */}
+
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffa259', height: '700px'}}>
                     <h1 style={{color: 'black',cursor: 'pointer', marginTop: '370px'}} onClick={this.props.logout}>Main Content</h1>
                 </div>
