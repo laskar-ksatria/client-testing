@@ -11,8 +11,12 @@ export default class MyWallet extends Component {
             status: false,
             errMessage: ''
         }
-
     };
+
+
+    alertMe = () => {
+        alert('hallo this is from child')
+    }
 
     componentDidMount() {
         axios({
@@ -33,9 +37,10 @@ export default class MyWallet extends Component {
     render() {
         return (
             <div>
-
-                <Header />
-                <h1 style={{cursor: 'pointer'}} onClick={this.props.logout}>Logout</h1>
+                <Header logout={this.props.logout} alertMe={this.alertMe} />
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffa259', height: '700px'}}>
+                    <h1 style={{color: 'black',cursor: 'pointer', marginTop: '370px'}} onClick={this.props.logout}>Main Content</h1>
+                </div>
             </div>
         )
     };
