@@ -12,7 +12,8 @@ class App extends React.Component {
       myWallet: false
     },
     user: null,
-    isLogin: false
+    isLogin: false,
+    username: ''
   };
   
   loginShow = () => {
@@ -39,12 +40,17 @@ class App extends React.Component {
     }})
   };
 
+  userName = (name) => {
+    this.setState({username: name})
+  }
+
   changeUserState = (data) => {
     this.setState({user: data});
+    this.userName(data.name)
   };
 
   changeLoginStatus = () => {
-    this.setState({isLogin: true})
+    this.setState({isLogin: true});
   };
 
   logout = () => {
@@ -64,15 +70,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        
+        {this.state.username}
         {this.state.pages.login ? <Login myWalletShow={this.walletShow} changeUser={this.changeUserState} changeLoginStatus={this.changeLoginStatus} /> : ""}
         {this.state.pages.register ? <Register loginShow={this.loginShow} /> : ""}
-        {this.state.pages.myWallet ? <MyWallet user={this.user} logout={this.logout} /> : ""}
+        {this.state.pages.myWallet ? <MyWallet user={this.state.user} username={this.state.username} logout={this.logout} /> : ""}
 
       </div>
     )
   }
-
 
 };
 

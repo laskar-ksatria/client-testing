@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default class Login extends Component {
 
@@ -9,13 +10,19 @@ export default class Login extends Component {
         errStatus: {
             status: false,
             errMessage: ''
-        }
+        },
+        successStatus: {
+            status: false,
+            successMessage: ''
+        },
+        user: null
     };
 
 
 
     onLogin = (e) => {
         e.preventDefault();
+        Swal.showLoading();
         axios({
             url:'http://35.247.159.61/users/login',
             method: 'POST',
@@ -26,12 +33,20 @@ export default class Login extends Component {
         })
         .then(({data}) => { 
             this.props.changeUser(data.user);
+            this.setState({successMessage: {
+                status: true,
+                message: data.message
+            }})
             localStorage.setItem('codeoToken', data.token);
-            this.props.changeLoginStatus();
+            Swal.close();
             this.props.myWalletShow();
+            this.props.changeLoginStatus();
+            this.props.changeUserState(data.user);
         })
         .catch(err => {
-            console.log(err);
+            this.setState({errStatus: {
+                status: true,
+            }})
         })
     };
 

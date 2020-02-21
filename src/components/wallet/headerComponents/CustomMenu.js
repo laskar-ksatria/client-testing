@@ -6,8 +6,8 @@ function CustomMenu(props) {
         <div className="navbar-custom-menu">
             <div className="container-fluid">
                 <div id="navigation">
-                    {/* <NavigationMenu /> */}
-                    <h1>This is Nav</h1>
+                    <NavigationMenu />
+                    {/* <h1>This is Nav</h1> */}
                 </div>
             </div>
         </div>

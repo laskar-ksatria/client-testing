@@ -7,7 +7,7 @@ function NavigationMenu(props) {
     return (
 
         <ul className="navigation-menu">
-                    <li className="has-submenu">
+                    <li className="has-submenu" style={{cursor: 'pointer'}}>
                         {/* <Link to="/">
                             <i className="dripicons-view-thumb" /><span> Dashboard </span>
                         </Link> */}
@@ -15,9 +15,9 @@ function NavigationMenu(props) {
                             <i className="dripicons-view-thumb" /><span> Dashboard </span>
                         </div>
                     </li>
-                    <li className="has-submenu">
+                    <li className="has-submenu" style={{cursor: 'pointer'}}>
                         {/* <Link to="/exchange"> */}
-                        <div>
+                        <a>
                             <svg className="nav-svg" version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style={{enableBackground: 'new 0 0 512 512'}} xmlSpace="preserve">
                                 <g>
                                     <ellipse className="svg-primary" transform="matrix(0.9998 -1.842767e-02 1.842767e-02 0.9998 -7.7858 3.0205)" cx={160} cy={424} rx={24} ry={24} />
@@ -30,13 +30,13 @@ function NavigationMenu(props) {
                                 </g>
                             </svg>
                             <span> Exchange </span>
-                        </div>
+                        </a>
 
                         {/* </Link> */}
                     </li>
                     {/*end has-submenu*/}
-                    <li className="has-submenu">
-                        <button>
+                    {/* <li className="has-submenu">
+                        <a>
                             <svg className="nav-svg" version="1.1" id="Layer_5" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style={{enableBackground: 'new 0 0 512 512'}} xmlSpace="preserve">
                                 <g>
                                     <path className="svg-primary" d="M376,192h-24v-46.7c0-52.7-42-96.5-94.7-97.3c-53.4-0.7-97.3,42.8-97.3,96v48h-24c-22,0-40,18-40,40v192c0,22,18,40,40,40
@@ -46,27 +46,27 @@ function NavigationMenu(props) {
                                 </g>
                             </svg>
                             <span> Settings </span>
-                        </button>
+                        </a>
                         <ul className="submenu">
-                            <li>
+                            <li> */}
                                 {/* <Link to="/login"><i className="dripicons-enter" />Log In</Link> */}
-                                <div><i className="dripicons-enter" />Log In</div>
+                                {/* <div><i className="dripicons-enter" />Log In</div>
                             </li>
-                            <li>
+                            <li> */}
                                 {/* <Link to="/register"><i className="dripicons-pencil" />Register</Link> */}
-                                <div><i className="dripicons-pencil" />Register</div>
-                            </li>
-                            <li>
+                                {/* <div><i className="dripicons-pencil" />Register</div> */}
+                            {/* </li>
+                            <li> */}
                                 {/* <Link to="/recover"><i className="dripicons-clockwise" />Recover Password</Link> */}
-                                <div><i className="dripicons-clockwise" />Recover Password</div>
-                            </li>
+                                {/* <div><i className="dripicons-clockwise" />Recover Password</div> */}
+                            {/* </li> */}
 
                             {/*
                             <li><a href="authentication/auth-lock-screen.html"><i class="dripicons-lock"></i>Lock Screen</a></li>
                             <li><a href="authentication/auth-404.html"><i class="dripicons-warning"></i>Error 404</a></li>
                             <li><a href="authentication/auth-500.html"><i class="dripicons-wrong"></i>Error 500</a></li>*/}
-                        </ul>
-                    </li>
+                        {/* </ul> */}
+                    {/* </li> */}
                     {/*end has-submenu*/}
                     {/*
                     <li className="has-submenu">

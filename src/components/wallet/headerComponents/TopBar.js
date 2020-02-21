@@ -61,7 +61,7 @@ function AuthTwo(props) {
             <li className="dropdown">
                 <button style={{backgroundColor: '#1c233f', border: 'none'}} className="nav-link dropdown-toggle waves-effect waves-light nav-user pr-0" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                     <img src="./assets/images/users/user-4.jpg" alt="profile-user" className="rounded-circle" />
-                    <span className="ml-1 nav-user-name hidden-sm"> Nama User <i className="mdi mdi-chevron-down" /> </span>
+                    <span className="ml-1 nav-user-name hidden-sm" style={{color: 'yellow'}}> {props.username} <i className="mdi mdi-chevron-down" /> </span>
                 </button>
                 <div className="dropdown-menu dropdown-menu-right">
                     <div className="dropdown-item" to="/profile"><i className="dripicons-user text-muted mr-2" /> Profile</div>
@@ -147,7 +147,7 @@ function ListUnstyled(props) {
             </li>
 
             <AuthOne />
-            <AuthTwo logout={props.logout} />
+            <AuthTwo logout={props.logout} username={props.username} />
 
             </ul>
         </>
@@ -169,7 +169,7 @@ export const TopBar = (props) => {
                         </span>
                     </div>
                 </div>
-                <ListUnstyled logout={props.logout} />
+                <ListUnstyled logout={props.logout} username={props.username} />
                 <ul className="list-unstyled topbar-nav mb-0">
                 </ul>
 

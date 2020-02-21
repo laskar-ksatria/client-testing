@@ -9,7 +9,7 @@ class Header extends React.Component {
         return (
             <>
                 <div className="topbar">
-                    <TopBar logout={this.props.logout} />
+                    <TopBar logout={this.props.logout} username={this.props.username} />
                     <CustomMenu /> 
                 </div>
             </>

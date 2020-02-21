@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './wallet/Header';
+import MainPage from './wallet/MainPage';
+import Footer from './wallet/Footer';
 
 
 export default class MyWallet extends Component {
 
+
+
+    // state = {
+    //     user: null,
+    //     errStatus: {
+    //         status: false,
+    //         errMessage: ''
+    //     }
+    // };
+
     state = {
-        user: null,
+        user: '',
         errStatus: {
             status: false,
             errMessage: ''
@@ -16,11 +28,16 @@ export default class MyWallet extends Component {
 
     componentDidMount() {
         axios({
-            url: 'http://35.247.159.61/users',
-            method: 'GET'
+            url: 'http://35.247.159.61/users/account',
+            method: 'GET',
+            headers: {
+                jwttoken: localStorage.getItem('codeoToken')
+            }
         })
         .then(({data}) => {
-            this.user = data;
+           
+            this.setState({user: data})
+            
         })
         .catch(err => {
             this.setState({err: {
@@ -33,15 +50,15 @@ export default class MyWallet extends Component {
     render() {
         return (
             <div>
-                <Header logout={this.props.logout} />
+                <Header logout={this.props.logout} username={this.state.user.name} />
 
-                {/* <MainPage />
-
-                <Footer /> */}
-
+                <MainPage />
+        
+{/*              
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffa259', height: '700px'}}>
                     <h1 style={{color: 'black',cursor: 'pointer', marginTop: '370px'}} onClick={this.props.logout}>Main Content</h1>
-                </div>
+                </div> */}
+                <Footer />
             </div>
         )
     };

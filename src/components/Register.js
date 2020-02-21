@@ -1,6 +1,76 @@
 import React, { Component } from 'react'
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default class Register extends Component {
+
+
+    state = {
+        name: '',
+        email: '',
+        password: '',
+        confirm_password: '',
+        errStatus: {
+            status: false,
+            errMessage: ''
+        }
+    };
+
+
+    register = (e) => {
+        e.preventDefault();
+        Swal.showLoading();
+        axios({
+            url: 'http://localhost:3005/users',
+            method: 'POST',
+            data: {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password,
+                confirm_password: this.state.confirm_password
+            }
+        })
+        .then(({data}) => {
+            Swal.close();
+            this.setState({errStatus: {status: true}});
+
+            Swal.fire({
+                icon: 'success',
+                text: data.message,
+                showClass: {
+                  popup: 'animated fadeInDown faster'
+                },
+                hideClass: {
+                  popup: 'animated fadeOutUp faster'
+                },
+                showConfirmButton: true,
+              })
+
+        })
+        .catch(err => {
+            this.setState({errStatus: {
+                status: true,
+                errMessage: err.response.data.message
+            }})
+            Swal.fire({
+                icon: 'error',
+                text: err.response.data.message,
+                showClass: {
+                  popup: 'animated fadeInDown faster'
+                },
+                hideClass: {
+                  popup: 'animated fadeOutUp faster'
+                },
+                showConfirmButton: false,
+                timer: 1500
+              })
+        })
+    };
+
+    onChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
     render() {
         return (
             <div className="account-body accountbg">
@@ -30,14 +100,14 @@ export default class Register extends Component {
                                         <h4 className="mt-0 mb-2 mt-4">Register</h4>
                                     </div>
                                     {/*end auth-logo-text*/}
-                                    <form className="form-horizontal auth-form my-4" onSubmit={ this.handleSubmit }>
+                                    <form className="form-horizontal auth-form my-4" onSubmit={ this.register }>
                                         <div className="form-group">
                                             <label htmlFor="name">Name</label>
                                             <div className="input-group mb-3">
                                                 <span className="auth-form-icon">
                                                     <i className="dripicons-user" /> 
                                                 </span>
-                                                <input type="text" className='form-control frm-new' id="name" placeholder="Enter name" name="name" onChange={ this.handleInputChange } />
+                                                <input type="text" className='form-control frm-new' id="name" placeholder="Enter name" name="name" onChange={ this.onChange } />
                                             </div>
                                             {/* {errors.name && (<div className="invalid-feedback pesanerror">{errors.name}</div>)} */}
                                         </div>
@@ -48,7 +118,7 @@ export default class Register extends Component {
                                                 <span className="auth-form-icon">
                                                     <i className="dripicons-mail" /> 
                                                 </span>
-                                                <input type="text" className='form-control frm-new' id="email" placeholder="Enter email" name="email" onChange={ this.handleInputChange } />
+                                                <input type="text" className='form-control frm-new' id="email" placeholder="Enter email" name="email" onChange={ this.onChange } />
                                             </div>
                                             {/* {errors.email && (<div className="invalid-feedback pesanerror">{errors.email}</div>)} */}
                                         </div>
@@ -62,7 +132,7 @@ export default class Register extends Component {
 
 
                                             {/* INPUT =========================================== */}
-                                                <input type="password" className='form-control frm-new' id="password" placeholder="Enter password" name="password" onChange={ this.handleInputChange } />
+                                                <input type="password" className='form-control frm-new' id="password" placeholder="Enter password" name="password" onChange={ this.onChange } />
                                             {/* INPUT =========================================== */}
                                             
                                             </div>
@@ -78,7 +148,7 @@ export default class Register extends Component {
 
 
                                             {/* INPUT =========================================== */}
-                                                <input type="password" className='form-control frm-new' id="password_confirm" placeholder="Enter password" name="password_confirm" onChange={ this.handleInputChange } />
+                                                <input type="password" className='form-control frm-new' id="password_confirm" placeholder="Enter password" name="confirm_password" onChange={ this.onChange } />
                                             {/* INPUT =========================================== */}
                                             
                                             </div>
