@@ -57,7 +57,6 @@ function AuthTwo(props) {
 
     return (
         <>
-
             <li className="dropdown">
                 <button style={{backgroundColor: '#1c233f', border: 'none'}} className="nav-link dropdown-toggle waves-effect waves-light nav-user pr-0" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                     <img src="./assets/images/users/user-4.jpg" alt="profile-user" className="rounded-circle" />
@@ -73,8 +72,6 @@ function AuthTwo(props) {
                     <button onClick={props.logout} className="dropdown-item"><i className="dripicons-exit text-muted mr-2" />Logout</button>
                 </div>
             </li>
-
-
         </>
     )
 
@@ -147,7 +144,9 @@ function ListUnstyled(props) {
             </li>
 
             <AuthOne />
-            <AuthTwo logout={props.logout} username={props.username} />
+            <AuthTwo logout={props.logout}
+             username={props.username}
+              />
 
             </ul>
         </>
@@ -162,14 +161,16 @@ export const TopBar = (props) => {
                 <div className="topbar-left">
                     <div className="logo">
                         <span>
-                            <img src="./assets/images/codeoku.png" alt="logo-small" className="logo-sm" />
+                            <img style={{cursor: 'pointer'}} src="./assets/images/codeoku.png" alt="logo-small" className="logo-sm" />
                         </span>
                             <span>
-                            <img src="./assets/images/codeo.png" alt="logo-large" className="logo-lg" />
+                            <img style={{cursor: 'pointer'}} src="./assets/images/codeo.png" alt="logo-large" className="logo-lg" />
                         </span>
                     </div>
                 </div>
-                <ListUnstyled logout={props.logout} username={props.username} />
+                <ListUnstyled logout={props.logout} 
+                username={props.username}
+                 />
                 <ul className="list-unstyled topbar-nav mb-0">
                 </ul>
 

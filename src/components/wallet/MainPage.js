@@ -3,34 +3,79 @@ import WalletTransfer from './mainPageComponents/WalletTransfer';
 import TransferHistory from './mainPageComponents/TransferHistory';
 import History from './mainPageComponents/History';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 class MainPage extends React.Component {
 
     state = {
-        user: null,
+        user: '',
         errStatus: {
             status: false,
             errMessage: ''
-        }
+        },
+        account: '',
+        url: 'http://localhost:3005',
+        isAccount: false
+    };
+
+   
+
+    getMyAccount = () => {
+       
+        axios({
+            url: `${this.state.url}/accounts/myAccount`,
+            method: 'GET',
+            headers: {
+                jwttoken: localStorage.getItem('codeoToken')
+            }
+        })
+        .then(({data}) => {   
+            this.setState({account: data});
+            this.setState({isAccount: true})
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    };
+
+
+    generateToken = () => {
+        axios({
+            url: `${this.state.url}/account/newAccount`,
+            method: 'POST',
+            headers: {
+                jwttoken: localStorage.getItem('codeoToken')
+            }
+        })
+        .then(({data}) => {
+            this.setState({account: data});
+            this.setState({isAccount: true});
+        })
+        .catch(err => {
+            console.log(err);
+        })
     };
 
     componentDidMount() {
+        Swal.showLoading()
         axios({
-            url: 'http://localhost:3005/users/account',
+            url: `${this.state.url}/users`,
             method: 'GET',
             headers: {
                 jwttoken: localStorage.getItem('codeoToken')
             }
         })
         .then(({data}) => {
-            this.setState({user: data.user});
+            this.setState({user: data});
+            this.getMyAccount();
+            Swal.close()
         })
         .catch(err => {
             this.setState({errStatus: {
                 status: true,
-                errMessage: err.response.data.message
+                // errMessage: err.response.data.message
             }})
-        })
+        });
     };
 
     render() {
@@ -39,31 +84,25 @@ class MainPage extends React.Component {
                 <div className="page-wrapper">
                     <div className="page-content">
                         <div className="container-fluid">
-
                             <div className="row">
                                 <div className="col-lg-7 mt-4">
-                                    <WalletTransfer user={this.state.user} />
+                                    <WalletTransfer isAccount={this.state.isAccount} account={this.state.account} getMyAccount={this.getMyAccount} generateToken={this.generateToken}  />
                                 </div>
-
                                 <div className="col-lg-5 mt-4">
                                     <TransferHistory />
                                 </div>
-
                             </div>
-
                             <div className="row">
                                 <div className="col-lg-12">
                                     <History />
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </>
         )
     };
-
 
 };
 
