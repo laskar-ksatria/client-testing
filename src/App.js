@@ -2,6 +2,8 @@ import React from 'react';
 import Login from './components/Login';
 import MyWallet from './components/MyWallet';
 import Register from './components/Register';
+import Axios from 'axios';
+import Swal from 'sweetalert2';
 
 class App extends React.Component {
 
@@ -11,9 +13,12 @@ class App extends React.Component {
       register: true,
       myWallet: false
     },
-    user: null,
+    email: '',
+    password: '',
+    user: {},
     isLogin: false,
-    username: ''
+    username: '',
+    url: 'http://localhost:3005'
   };
   
   loginShow = () => {
@@ -42,11 +47,6 @@ class App extends React.Component {
 
   userName = (name) => {
     this.setState({username: name})
-  }
-
-  changeUserState = (data) => {
-    this.setState({user: data});
-    this.userName(data.name)
   };
 
   changeLoginStatus = () => {
@@ -57,6 +57,33 @@ class App extends React.Component {
     localStorage.removeItem('codeoToken')
     this.setState({isLogin: false});
     this.loginShow();
+  };
+
+  login = (e) => {
+    e.preventDefault();
+    Swal.showLoading()
+    Axios({
+      url: `${this.state.url}/users/login`,
+      method: 'POST',
+      data: {
+        email: this.state.email,
+        password: this.state.password
+      }
+    })
+    .then(({data}) => {
+      this.setState({user: data.user});
+      localStorage.setItem('codeoToken', data.token);
+      this.userName(data.user.name)
+      this.walletShow();
+      Swal.close();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  };
+
+  onUserstateChange = (e) => {
+    this.setState({[e.target.name]: e.target.value});
   };
 
   componentDidMount() {
@@ -70,15 +97,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {this.state.username}
-        {this.state.pages.login ? <Login myWalletShow={this.walletShow} changeUser={this.changeUserState} changeLoginStatus={this.changeLoginStatus} /> : ""}
+        {this.state.pages.login ? <Login myWalletShow={this.walletShow} login={this.login} onUserstateChange={this.onUserstateChange}/> : ""}
         {this.state.pages.register ? <Register loginShow={this.loginShow} /> : ""}
-        {this.state.pages.myWallet ? <MyWallet user={this.state.user} username={this.state.username} logout={this.logout} /> : ""}
-
+        {this.state.pages.myWallet ? <MyWallet user={this.state.user} username={this.state.user.name} logout={this.logout} /> : ""}
       </div>
     )
-  }
-
+  };
 };
 
 

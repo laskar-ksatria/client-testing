@@ -59,7 +59,7 @@ function AuthTwo(props) {
         <>
             <li className="dropdown">
                 <button style={{backgroundColor: '#1c233f', border: 'none'}} className="nav-link dropdown-toggle waves-effect waves-light nav-user pr-0" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                    <img src="./assets/images/users/user-4.jpg" alt="profile-user" className="rounded-circle" />
+                    <img src="./assets/images/picture1.jpg" alt="profile-user" className="rounded-circle" />
                     <span className="ml-1 nav-user-name hidden-sm" style={{color: 'yellow'}}> {props.username} <i className="mdi mdi-chevron-down" /> </span>
                 </button>
                 <div className="dropdown-menu dropdown-menu-right">

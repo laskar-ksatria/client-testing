@@ -20,39 +20,39 @@ export default class Login extends Component {
 
 
 
-    onLogin = (e) => {
-        e.preventDefault();
-        Swal.showLoading();
-        axios({
-            url:'http://35.247.159.61/users/login',
-            method: 'POST',
-            data: {
-                email: this.state.email,
-                password: this.state.password
-            }
-        })
-        .then(({data}) => { 
-            this.props.changeUser(data.user);
-            this.setState({successMessage: {
-                status: true,
-                message: data.message
-            }})
-            localStorage.setItem('codeoToken', data.token);
-            Swal.close();
-            this.props.myWalletShow();
-            this.props.changeLoginStatus();
-            this.props.changeUserState(data.user);
-        })
-        .catch(err => {
-            this.setState({errStatus: {
-                status: true,
-            }})
-        })
-    };
+    // onLogin = (e) => {
+    //     e.preventDefault();
+    //     Swal.showLoading();
+    //     axios({
+    //         url:'http://35.247.159.61/users/login',
+    //         method: 'POST',
+    //         data: {
+    //             email: this.state.email,
+    //             password: this.state.password
+    //         }
+    //     })
+    //     .then(({data}) => { 
+    //         this.props.changeUser(data.user);
+    //         this.setState({successMessage: {
+    //             status: true,
+    //             message: data.message
+    //         }})
+    //         localStorage.setItem('codeoToken', data.token);
+    //         Swal.close();
+    //         this.props.myWalletShow();
+    //         this.props.changeLoginStatus();
+    //         this.props.changeUserState(data.user);
+    //     })
+    //     .catch(err => {
+    //         this.setState({errStatus: {
+    //             status: true,
+    //         }})
+    //     })
+    // };
 
-    onChange = (e) => {
-        this.setState({[e.target.name]: e.target.value});
-    }
+    // onChange = (e) => {
+    //     this.setState({[e.target.name]: e.target.value});
+    // }
 
 
     render() {
@@ -87,7 +87,7 @@ export default class Login extends Component {
 
                                         {/* FORM ================================================================ */}
                                        
-                                        <form className="form-horizontal auth-form" onSubmit={ this.onLogin }>
+                                        <form className="form-horizontal auth-form" onSubmit={ this.props.login }>
                                             <div className="form-group">
                                                 <label htmlFor="email">Email</label>
                                                 <div className="input-group mb-3">
@@ -97,7 +97,7 @@ export default class Login extends Component {
 
 
                                                     {/* INPUT ============================================ */}
-                                                    <input type="text" name="email" className='form-control frm-new' id="email" placeholder="Enter email" onChange={ this.onChange } value={ this.state.email } />
+                                                    <input type="text" name="email" className='form-control frm-new' id="email" placeholder="Enter email" onChange={ this.props.onUserstateChange } />
                                                     {/* INPUT ============================================ */}
 
                                                 
@@ -113,7 +113,7 @@ export default class Login extends Component {
 
 
                                                     {/* INPUT ============================================ */}
-                                                    <input type="password" name="password" className='form-control frm-new' id="password" placeholder="Enter password" onChange={ this.onChange } value={ this.state.password } />
+                                                    <input type="password" name="password" className='form-control frm-new' id="password" placeholder="Enter password" onChange={ this.props.onUserstateChange } />
                                                     {/* INPUT ============================================ */}
 
                                                 

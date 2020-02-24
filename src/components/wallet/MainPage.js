@@ -13,12 +13,10 @@ class MainPage extends React.Component {
             status: false,
             errMessage: ''
         },
-        account: '',
+        account: null,
         url: 'http://localhost:3005',
         isAccount: false
     };
-
-   
 
     getMyAccount = () => {
        
@@ -39,43 +37,26 @@ class MainPage extends React.Component {
     };
 
 
-    generateToken = () => {
-        axios({
-            url: `${this.state.url}/account/newAccount`,
-            method: 'POST',
-            headers: {
-                jwttoken: localStorage.getItem('codeoToken')
-            }
-        })
-        .then(({data}) => {
-            this.setState({account: data});
-            this.setState({isAccount: true});
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    };
-
     componentDidMount() {
-        Swal.showLoading()
-        axios({
-            url: `${this.state.url}/users`,
-            method: 'GET',
-            headers: {
-                jwttoken: localStorage.getItem('codeoToken')
-            }
-        })
-        .then(({data}) => {
-            this.setState({user: data});
-            this.getMyAccount();
-            Swal.close()
-        })
-        .catch(err => {
-            this.setState({errStatus: {
-                status: true,
-                // errMessage: err.response.data.message
-            }})
-        });
+        // Swal.showLoading()
+        // axios({
+        //     url: `${this.state.url}/users`,
+        //     method: 'GET',
+        //     headers: {
+        //         jwttoken: localStorage.getItem('codeoToken')
+        //     }
+        // })
+        // .then(({data}) => {
+        //     this.setState({user: data});
+        //     this.getMyAccount();
+        //     Swal.close()
+        // })
+        // .catch(err => {
+        //     this.setState({errStatus: {
+        //         status: true,
+        //         // errMessage: err.response.data.message
+        //     }})
+        // });
     };
 
     render() {
@@ -86,7 +67,7 @@ class MainPage extends React.Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-lg-7 mt-4">
-                                    <WalletTransfer isAccount={this.state.isAccount} account={this.state.account} getMyAccount={this.getMyAccount} generateToken={this.generateToken}  />
+                                    <WalletTransfer generateToken={this.props.generateToken} eth={this.props.eth}/>
                                 </div>
                                 <div className="col-lg-5 mt-4">
                                     <TransferHistory />
@@ -103,7 +84,6 @@ class MainPage extends React.Component {
             </>
         )
     };
-
 };
 
 export default MainPage;

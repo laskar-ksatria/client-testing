@@ -27,14 +27,13 @@ class WalletTransfer extends React.Component {
                                                             />
                                                         </div>
                                                         <div className="col-md-7 mt-1">
+                                                            
                                                             <h5>Address</h5>
                                                             {/* <h6 className="mb-2">{this.state.eth} */}
-
-                                                            {this.props.isAccount ? <h6 className="mb-2">ETh<button className="btn btn-primary btn-xs btn-silver-cus">Copy</button></h6> : <button onClick={this.props.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button>}
+                                                          
+                                                            {this.props.eth != '' ?  <h5 className="mb-2">{this.props.eth}<button className="btn btn-primary btn-xs btn-silver-cus">Copy</button></h5> : <button onClick={this.props.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button>}
+                                                           {/* <button onClick={this.props.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button> */}
                                                            {/* <h6 className="mb-2">{this.props.account.ETH}<button className="btn btn-primary btn-xs btn-silver-cus">Copy</button></h6><button onClick={this.props.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button>  */}
-                                                            
-                                                            
-                                                            
                                                             {/* <button className="btn btn-primary btn-xs btn-silver-cus">Copy</button></h6><button onClick={this.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button> */}
                                                             <h5>Balance</h5>
                                                             <h3 className="mb-2">0000 CODEO</h3>
