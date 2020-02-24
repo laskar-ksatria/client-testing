@@ -21,10 +21,11 @@ export default class MyWallet extends Component {
         username: '',
         eth: '',
         account: '',
-        url: 'http://localhost:3005'
+        url: 'http://35.247.159.61'
     };
 
     generateToken = () => {
+        
         Swal.showLoading();
         axios({
             url: `${this.state.url}/accounts/newAccount`,
@@ -39,13 +40,13 @@ export default class MyWallet extends Component {
                 message: data.message
             }})
             this.setState({eth: data.userAccount.ETH});
+            
             this.setState({account: data.userAccount});
             Swal.close();
         })
         .catch(err => {
             console.log(err);
             Swal.close();
-            alert(err)
         })
 
     };
@@ -83,7 +84,7 @@ export default class MyWallet extends Component {
     componentWillMount() {
         Swal.showLoading();
         axios({
-            url: 'http://localhost:3005/users/account',
+            url: 'http://35.247.159.61/users/account',
             method: 'GET',
             headers: {
                 jwttoken: localStorage.getItem('codeoToken')

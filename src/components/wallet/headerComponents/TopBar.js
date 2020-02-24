@@ -63,9 +63,9 @@ function AuthTwo(props) {
                     <span className="ml-1 nav-user-name hidden-sm" style={{color: 'yellow'}}> {props.username} <i className="mdi mdi-chevron-down" /> </span>
                 </button>
                 <div className="dropdown-menu dropdown-menu-right">
-                    <div className="dropdown-item" to="/profile"><i className="dripicons-user text-muted mr-2" /> Profile</div>
-                    <button className="dropdown-item" href="#"><i className="dripicons-wallet text-muted mr-2" /> My Wallet</button>
-                    <button className="dropdown-item" href="#"><i className="dripicons-gear text-muted mr-2" /> Settings</button>
+                    <div className="dropdown-item" to="/profile" style={{cursor: 'pointer'}}><i className="dripicons-user text-muted mr-2" /> Profile</div>
+                    <button className="dropdown-item" type="button"><i className="dripicons-wallet text-muted mr-2" /> My Wallet</button>
+                    <button className="dropdown-item" type="button"><i className="dripicons-gear text-muted mr-2" /> Settings</button>
                     {/*<a class="dropdown-item" href="#"><i class="dripicons-lock text-muted mr-2"></i> Lock screen</a>*/}
                     <div className="dropdown-divider" />
                     {/* <button className="dropdown-item" href="#" onClick={this.onLogout.bind(this)}><i className="dripicons-exit text-muted mr-2" />Logout</a> */}

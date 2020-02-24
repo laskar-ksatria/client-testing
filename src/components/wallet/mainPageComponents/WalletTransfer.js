@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { QRCode } from "react-qr-svg";
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 class WalletTransfer extends React.Component {
    
@@ -31,7 +31,7 @@ class WalletTransfer extends React.Component {
                                                             <h5>Address</h5>
                                                             {/* <h6 className="mb-2">{this.state.eth} */}
                                                           
-                                                            {this.props.eth != '' ?  <h5 className="mb-2">{this.props.eth}<button className="btn btn-primary btn-xs btn-silver-cus">Copy</button></h5> : <button onClick={this.props.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button>}
+                                                            {this.props.eth !== '' ?  <h5 className="mb-2">{this.props.eth}<button className="btn btn-primary btn-xs btn-silver-cus" type='button'>Copy</button></h5> : <button onClick={this.props.generateToken} type="button" className="btn btn-success btn-xs btn-silver-cus">Generate</button>}
                                                            {/* <button onClick={this.props.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button> */}
                                                            {/* <h6 className="mb-2">{this.props.account.ETH}<button className="btn btn-primary btn-xs btn-silver-cus">Copy</button></h6><button onClick={this.props.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button>  */}
                                                             {/* <button className="btn btn-primary btn-xs btn-silver-cus">Copy</button></h6><button onClick={this.generateToken} className="btn btn-success btn-xs btn-silver-cus">Generate</button> */}

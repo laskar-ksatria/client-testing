@@ -18,7 +18,7 @@ class App extends React.Component {
     user: {},
     isLogin: false,
     username: '',
-    url: 'http://localhost:3005'
+    url: 'http://35.247.159.61'
   };
   
   loginShow = () => {

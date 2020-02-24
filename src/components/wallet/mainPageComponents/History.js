@@ -11,7 +11,6 @@ class History extends React.Component {
 
     };
 
-
     render() {
         return (
             <>
@@ -32,10 +31,6 @@ class History extends React.Component {
                                     {/*end tr*/}
                                 </thead>
                                 <tbody>
-                                    <HistoryTable />
-                                    <HistoryTable />
-                                    <HistoryTable />
-                                    <HistoryTable />
                                     <HistoryTable />
                                     <HistoryTable />
                                 </tbody>
