@@ -1,4 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+//Router
+import { useHistory, useRouteMatch, Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+//auth;
+import auth from '../../../auth';
+
+//Context
+import { userContext } from '../../../context';
+
+export const TopBarRight = (props) => {
+
+    return (
+        <>
+          <ListUnstyled  />
+        </>
+    )
+};
 
 
 function AuthOne(props) {
@@ -54,22 +73,46 @@ function AuthOne(props) {
 
 function AuthTwo(props) {
 
+    let history = useHistory();
+
+    let user = useContext(userContext);
+
+    let { url } = useRouteMatch();
+
+    const logout = () => {
+        Swal.showLoading();
+        auth.logout(() => {
+            localStorage.removeItem('codeoToken')
+            history.push('/');
+        })
+        Swal.close();
+    };
 
     return (
         <>
             <li className="dropdown">
                 <button style={{backgroundColor: '#1c233f', border: 'none'}} className="nav-link dropdown-toggle waves-effect waves-light nav-user pr-0" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                     <img src="./assets/images/picture1.jpg" alt="profile-user" className="rounded-circle" />
-                    <span className="ml-1 nav-user-name hidden-sm" style={{color: 'yellow'}}> {props.username} <i className="mdi mdi-chevron-down" /> </span>
+                    <span className="ml-1 nav-user-name hidden-sm" style={{color: 'white'}}> {user.name} <i className="mdi mdi-chevron-down" /> </span>
                 </button>
                 <div className="dropdown-menu dropdown-menu-right">
-                    <div className="dropdown-item" to="/profile" style={{cursor: 'pointer'}}><i className="dripicons-user text-muted mr-2" /> Profile</div>
+                    {/* <Link to="Profile" className="dropdown-item" style={{cursor: 'pointer'}}>
+                        <i className="dropicons-user text-muted mr-2"/>
+                        Profile                        
+                    </Link> */}
+                    <div className="dropdown-item" to="/profile" style={{cursor: 'pointer'}}>
+                        <Link to={`${url}/profile`}>
+                            <i className="dripicons-user text-muted mr-2" />
+                            Profile
+                        </Link>
+                    </div>
                     <button className="dropdown-item" type="button"><i className="dripicons-wallet text-muted mr-2" /> My Wallet</button>
                     <button className="dropdown-item" type="button"><i className="dripicons-gear text-muted mr-2" /> Settings</button>
                     {/*<a class="dropdown-item" href="#"><i class="dripicons-lock text-muted mr-2"></i> Lock screen</a>*/}
                     <div className="dropdown-divider" />
                     {/* <button className="dropdown-item" href="#" onClick={this.onLogout.bind(this)}><i className="dripicons-exit text-muted mr-2" />Logout</a> */}
-                    <button onClick={props.logout} className="dropdown-item"><i className="dripicons-exit text-muted mr-2" />Logout</button>
+                    <button className="dropdown-item" type="button" onClick={logout}><i className="dripicons-exit text-muted mr-2" /> Logout</button>
+                
                 </div>
             </li>
         </>
@@ -144,37 +187,10 @@ function ListUnstyled(props) {
             </li>
 
             <AuthOne />
-            <AuthTwo logout={props.logout}
-             username={props.username}
-              />
+            <AuthTwo />
 
             </ul>
         </>
     )
 };
 
-export const TopBar = (props) => {
-
-    return (
-        <>
-            <nav className="topbar-main">
-                <div className="topbar-left">
-                    <div className="logo">
-                        <span>
-                            <img style={{cursor: 'pointer'}} src="./assets/images/codeoku.png" alt="logo-small" className="logo-sm" />
-                        </span>
-                            <span>
-                            <img style={{cursor: 'pointer'}} src="./assets/images/codeo.png" alt="logo-large" className="logo-lg" />
-                        </span>
-                    </div>
-                </div>
-                <ListUnstyled logout={props.logout} 
-                username={props.username}
-                 />
-                <ul className="list-unstyled topbar-nav mb-0">
-                </ul>
-
-            </nav>
-        </>
-    )
-};

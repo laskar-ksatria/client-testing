@@ -4649,7 +4649,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 .swal2-popup {
-  background: #1c233f;
+  background: #1c233f !important;
 }
 
 .swal2-popup .swal2-title {
@@ -9300,3 +9300,18 @@ hr.thick {
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+/* CUSTOM CSS */
+
+.default-qr-users{
+  display: none;
+}
+.result-generate-qr{
+  display: none;
+}
+
+.message-trf-confirm{
+  padding: 20px;
+  border: 1px dashed #FFF;
+  border-radius: 10px;
+}

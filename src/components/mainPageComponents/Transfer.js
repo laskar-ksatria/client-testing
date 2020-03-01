@@ -1,6 +1,6 @@
 import React from 'react';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+// import axios from 'axios';
 
 class TransferHistory extends React.Component {
 
@@ -9,7 +9,7 @@ class TransferHistory extends React.Component {
         address: '',
         total: 0,
         fee: 0.30,
-        url: 'http://35.247.159.61'
+        url: 'http://35.240.211.254'
     };
 
     onChangeAmount = (e) => {
@@ -23,44 +23,65 @@ class TransferHistory extends React.Component {
     };
 
     onSend = () => {
-
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
             },
             buttonsStyling: true
-          })
-          
-          swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: '<h3>Transfer Confirmation</h3>',
             text: this.state.amount,
-            icon: 'warning',
+            html:
+                  '<div class="message-trf-confirm">' +
+                    '<div class="row" style="text-align:left;">' +
+                        '<div class="col-md-4 mb-3">' +
+                            'Transfer To :' +
+                        '</div>' +
+                        
+                        '<div class="col-md-8">' +
+                            '<span class="text-warning">' +
+                                `${this.state.address}` +
+                            '</span>' +
+                        '</div>' +
+
+                        '<div class="col-md-4">' +
+                            'Amount :' +
+                        '</div>' +
+
+                        '<div class="col-md-8">' +
+                            '<span class="text-success">' +
+                                `${this.state.total}` +
+                            '</span>' +
+                        '</div>' +
+                    '</div>' +
+                  '</div>',
             showCancelButton: true,
-            confirmButtonText: 'Yes, send it!',
-            cancelButtonText: 'No, cancel!',
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            imageUrl: '../assets/images/codeoku.png',
+            imageHeight: 80,
             reverseButtons: true
-          }).then((result) => {
+        })
+        .then((result) => {
             if (result.value) {
-              swalWithBootstrapButtons.fire(
-                'Send!',
-                'Code Token Has been Sent',
-                'success'
-              );
+                swalWithBootstrapButtons.fire(
+                    'Send!',
+                    'Code Token Has been Sent',
+                    'success'
+                );
             } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
+                result.dismiss === Swal.DismissReason.cancel
             ) {
-              swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your imaginary file is safe :)',
-                'error'
-              )
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
             }
-          })
-
-
-
+        })
     };
 
     render() {

@@ -1,108 +1,73 @@
-import React from 'react';
-import Login from './components/Login';
-import MyWallet from './components/MyWallet';
-import Register from './components/Register';
-import Axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { useEffect } from 'react';
 
-class App extends React.Component {
 
-  state = {
-    pages: {
-      login: false,
-      register: true,
-      myWallet: false
-    },
-    email: '',
-    password: '',
-    user: {},
-    isLogin: false,
-    username: '',
-    url: 'http://35.247.159.61'
-  };
+// Router 
+
+import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
+
+
+//Pages
+import Login from './pages/Login';
+import Register from './pages/Register';
+import MyWallet from './pages/MyWallet';
+
+//Auth
+import auth from './auth';
+
+
+function App() {
+
+  let history = useHistory();
   
-  loginShow = () => {
-    this.setState({pages: {
-      login: true,
-      register: false,
-      myWallet: false
-    }})
-  };
+  useEffect(() => {
+    if(localStorage.getItem('codeoToken')) {
+      auth.login(() => {
+        history.push("/mywallet");
+      })
 
-  registerShow = () => {
-    this.setState({pages: {
-      login: false,
-      register: true,
-      myWallet: false
-    }})
-  };
-
-  walletShow = () => {
-    this.setState({pages: {
-      login: false,
-      register: false,
-      myWallet: true
-    }})
-  };
-
-  userName = (name) => {
-    this.setState({username: name})
-  };
-
-  changeLoginStatus = () => {
-    this.setState({isLogin: true});
-  };
-
-  logout = () => {
-    localStorage.removeItem('codeoToken')
-    this.setState({isLogin: false});
-    this.loginShow();
-  };
-
-  login = (e) => {
-    e.preventDefault();
-    Swal.showLoading()
-    Axios({
-      url: `${this.state.url}/users/login`,
-      method: 'POST',
-      data: {
-        email: this.state.email,
-        password: this.state.password
-      }
-    })
-    .then(({data}) => {
-      this.setState({user: data.user});
-      localStorage.setItem('codeoToken', data.token);
-      this.userName(data.user.name)
-      this.walletShow();
-      Swal.close();
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  };
-
-  onUserstateChange = (e) => {
-    this.setState({[e.target.name]: e.target.value});
-  };
-
-  componentDidMount() {
-    if (localStorage.getItem('codeoToken')) {
-      this.walletShow();
     }else {
-      this.registerShow();
-    }
-  };
+      auth.logout(() => {
+        history.push("/");
+      })
 
-  render() {
-    return (
-      <div>
-        {this.state.pages.login ? <Login myWalletShow={this.walletShow} login={this.login} onUserstateChange={this.onUserstateChange}/> : ""}
-        {this.state.pages.register ? <Register loginShow={this.loginShow} /> : ""}
-        {this.state.pages.myWallet ? <MyWallet user={this.state.user} username={this.state.user.name} logout={this.logout} /> : ""}
-      </div>
-    )
-  };
+    }
+  },[])
+
+  return (
+
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/mywallet" component={MyWallet} />
+        </Switch>
+
+  )
+
+};
+
+
+function ProtectedRoute({ component: Component, ...rest }) {
+  return (
+      <Route 
+          {...rest }
+          render={props => {
+              if(auth.isAuthenticated()) {
+                  return <Component {...props} />
+              }else {
+                  return <Redirect 
+                              to={
+                                  {
+                                      pathname: "/",
+                                      state: {
+                                          from: props.location
+                                      }
+                                  }
+                              }
+                          />
+              }
+          }}
+       />
+  )
 };
 
 
