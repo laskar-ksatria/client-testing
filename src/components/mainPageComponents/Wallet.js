@@ -17,6 +17,24 @@ function Wallet (props) {
 
     const [textCopied, setTextCopied] = useState(false);
 
+    const [Account, setAccount] = useState({});
+
+    useEffect(() => {
+        axios({
+            url: `${baseUrl}/accounts/myAccount`,
+            method: 'GET',
+            headers: {
+                jwttoken: localStorage.getItem('codeoToken')
+            }
+        })
+        .then(({data}) => {
+            
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, []);
+
     const generateToken = () => {
         Swal.showLoading();
         axios({

@@ -36,7 +36,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/register" component={Register} />
-          <ProtectedRoute path="/mywallet" component={MyWallet} />
+          <Route path="/mywallet" component={MyWallet} />
         </Switch>
 
   )
