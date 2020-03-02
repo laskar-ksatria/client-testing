@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 
 // Router 
-
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 
 
@@ -22,11 +21,12 @@ function App() {
   useEffect(() => {
     if(localStorage.getItem('codeoToken')) {
       auth.login(() => {
-        history.push("/mywallet");
+        // return history.push("/mywallet");
+        return <Redirect to="/mywallet" />
       })
     }else {
       auth.logout(() => {
-        history.push("/");
+        return history.push("/login");
       })
     }
   },[])
