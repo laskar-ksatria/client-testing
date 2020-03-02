@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 
 //Router
-import { Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 //Dependency
 import axios from 'axios';
@@ -56,18 +56,20 @@ export default function MyWallet() {
         <div>
             <userContext.Provider value={user}>
 
-                <Header/>
-                
-            <Switch>
-                <Route exact path={path}>
-                    <MainPage  ETH={ETH}/>
-                </Route>
-                <Route path={`${path}/profile`}>
-                    <Profile />
-                </Route>
-            </Switch>
+                    <Header/>
+                    
+                <Switch>
 
-                    <Footer />
+                    <Route exact path={path}>
+                        <MainPage  ETH={ETH}/>
+                    </Route>
+                    <Route path={`${path}/profile`}>
+                        <Profile />
+                    </Route>
+                    
+                </Switch>
+
+                        <Footer />
 
             </userContext.Provider>
         </div>

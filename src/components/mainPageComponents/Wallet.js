@@ -28,13 +28,13 @@ function Wallet (props) {
         })
         .then(({data}) => {
             Swal.close();
-            Swal.fire({
-                icon: 'success',
-                title: data.message,
-                showConfirmButton: false,
-                timer: 1500
-              });
-              setTimeout(function(){ window.location.reload(false); }, 1500); 
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: data.message,
+            //     showConfirmButton: false,
+            //     timer: 1500
+            //   });
+            window.location.reload(false);
         })
         .catch(err => {
             Swal.close();
