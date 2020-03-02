@@ -11,9 +11,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MyWallet from './pages/MyWallet';
 
+
 //Auth
 import auth from './auth';
-
 
 function App() {
 
@@ -24,12 +24,10 @@ function App() {
       auth.login(() => {
         history.push("/mywallet");
       })
-
     }else {
       auth.logout(() => {
         history.push("/");
       })
-
     }
   },[])
 
@@ -38,7 +36,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/mywallet" component={MyWallet} />
+          <ProtectedRoute path="/mywallet" component={MyWallet} />
         </Switch>
 
   )

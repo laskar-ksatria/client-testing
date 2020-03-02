@@ -33,7 +33,8 @@ function Wallet (props) {
                 title: data.message,
                 showConfirmButton: false,
                 timer: 1500
-              })
+              });
+              setTimeout(function(){ window.location.reload(false); }, 1500); 
         })
         .catch(err => {
             Swal.close();
@@ -71,9 +72,9 @@ function Wallet (props) {
                                         <h5>Address</h5>
                                         {/* <h6 className="mb-2">{this.state.eth} */}
 
-                                        {props.ETH != '' ?  
+                                        {user.account ?  
                                             <h5 className="mb-2" value={props.ETH}>
-                                                {props.ETH}
+                                                {user.account.ETH}
                                             
                                             <CopyToClipboard text={props.ETH} 
                                             onCopy={() => setTextCopied(true)}>

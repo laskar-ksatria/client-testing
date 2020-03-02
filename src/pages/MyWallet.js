@@ -49,7 +49,7 @@ export default function MyWallet() {
             console.log(err);
         })
 
-    }, [])
+    }, []);
 
     return(
 
@@ -76,7 +76,6 @@ export default function MyWallet() {
 
 };
 
-
 const Header = (props) => {
     return (
         <div className="topbar">
@@ -85,7 +84,6 @@ const Header = (props) => {
         </div>
     )
 };
-
 
 const MainPage = (props) => {
     return (
