@@ -26,7 +26,7 @@ function App() {
       })
     }else {
       auth.logout(() => {
-        return history.push("/login");
+        return <Redirect to="/login" />
       })
     }
   },[])
